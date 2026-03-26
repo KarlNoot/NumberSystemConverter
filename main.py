@@ -143,40 +143,11 @@ def fraccion_a_base(valor, base_destino, max_decimales=12):
     return signo + "".join(enteros)
 
 
-def mostrar_ponderaciones_sistema(base, num_digitos=10):
-    nombre_sistema = NOMBRES[base]
-
-    print(f"\nPonderaciones del sistema {nombre_sistema} (Base {base}):")
-    print("-" * 60)
-    print("Posición (derecha a izquierda):  ", end="")
-    for i in range(num_digitos):
-        print(f"{i:>6}", end="")
-    print()
-    print(f"Ponderación ({base}^n):           ", end="")
-    for i in range(num_digitos):
-        ponderacion = base ** i
-        print(f"{ponderacion:>6}", end="")
-    print("\n")
-
-
-def mostrar_tabla_ponderaciones():
-    print("\n" + "=" * 70)
-    print("TABLA DE PONDERACIONES HACIA DECIMAL".center(70))
-    print("=" * 70)
-
-    mostrar_ponderaciones_sistema(2)
-    mostrar_ponderaciones_sistema(8)
-    mostrar_ponderaciones_sistema(16)
-
-    print("Nota: la tabla muestra solo posiciones enteras.")
-    print("=" * 70)
-
-
 def mostrar_descomposicion_numero(numero, base):
     numero_original = numero.strip().upper()
     negativo = numero_original.startswith("-")
 
-    if numero_original[0] in "+-":
+    if numero_original and numero_original[0] in "+-":
         numero_limpio = numero_original[1:]
     else:
         numero_limpio = numero_original
@@ -233,8 +204,7 @@ def mostrar_menu_principal():
     print("""
 Seleccione la acción que desea realizar:
 1.- Realizar conversión entre sistemas
-2.- Ver tabla de ponderaciones por sistema
-3.- Salir
+2.- Salir
 """)
     try:
         return int(input("Opción: "))
@@ -281,8 +251,6 @@ if __name__ == "__main__":
         if opcion == 1:
             realizar_conversion()
         elif opcion == 2:
-            mostrar_tabla_ponderaciones()
-        elif opcion == 3:
             print("Saliendo...")
             break
         else:
